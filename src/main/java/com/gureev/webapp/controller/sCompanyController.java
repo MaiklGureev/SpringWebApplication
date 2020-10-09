@@ -1,17 +1,13 @@
 package com.gureev.webapp.controller;
 
 
-import com.gureev.webapp.domain.cServiceClass;
 import com.gureev.webapp.domain.sCompany;
 import com.gureev.webapp.repos.sCompanyRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpServletResponseWrapper;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -51,7 +47,7 @@ public class sCompanyController {
     public ResponseEntity getCompany(@RequestParam Long id) {
         try{
             sCompany entity = sCompanyRepo.findById(id);
-            if(entity!=null){
+            if(entity !=null){
                 return new ResponseEntity(entity,HttpStatus.OK);
             }else {
                 return new ResponseEntity(HttpStatus.NOT_FOUND);
