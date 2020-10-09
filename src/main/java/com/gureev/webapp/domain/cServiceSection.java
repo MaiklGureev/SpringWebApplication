@@ -1,6 +1,11 @@
 package com.gureev.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jdk.nashorn.internal.ir.annotations.Ignore;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Entity
@@ -9,9 +14,9 @@ public class cServiceSection {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "c_serviceSection",fetch = FetchType.LAZY,
+    @JsonIgnore
+    @OneToMany(mappedBy = "c_serviceSection",
             cascade = CascadeType.REMOVE,orphanRemoval = true)
-
     private List<sCompany> s_companies;
 
     public List<cServiceClass> getcServiceClasses() {
@@ -22,7 +27,7 @@ public class cServiceSection {
         this.cServiceClasses = cServiceClasses;
     }
 
-    @OneToMany(mappedBy = "c_Service_section",fetch = FetchType.LAZY,orphanRemoval = true)
+    @OneToMany(mappedBy = "c_Service_section",orphanRemoval = true)
     private List<cServiceClass> cServiceClasses;
 
     private String name;
@@ -63,7 +68,6 @@ public class cServiceSection {
     public String toString() {
         return "c_ServiceSection{" +
                 "id=" + id +
-                ", s_companies=" + s_companies +
                 ", name='" + name + '\'' +
                 '}';
     }

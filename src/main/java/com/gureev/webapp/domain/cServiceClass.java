@@ -1,14 +1,18 @@
 package com.gureev.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 
 @Entity
 public class cServiceClass {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne(targetEntity = cServiceSection.class,optional=false,cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(targetEntity = cServiceSection.class, optional = false, cascade = CascadeType.ALL)
     private cServiceSection c_Service_section;
 
     private String code;
@@ -18,7 +22,7 @@ public class cServiceClass {
     public cServiceClass() {
     }
 
-    public cServiceClass(long id,cServiceSection c_Service_section, String code, String description) {
+    public cServiceClass(long id, cServiceSection c_Service_section, String code, String description) {
         this.id = id;
         this.c_Service_section = c_Service_section;
         this.code = code;
@@ -55,5 +59,15 @@ public class cServiceClass {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "cServiceClass{" +
+                "id=" + id +
+                ", c_Service_section=" + c_Service_section +
+                ", code='" + code + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

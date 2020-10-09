@@ -1,26 +1,30 @@
 package com.gureev.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 
 @Entity
 public class sCompany {
 
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = sAddress.class,optional=false,cascade = CascadeType.REMOVE)
+    @ManyToOne(targetEntity = sAddress.class, optional = false, cascade = CascadeType.REMOVE)
     private sAddress address;
 
     private String phone;
 
-    @ManyToOne(targetEntity = cCompRightNorm.class,optional=false)
+    @ManyToOne(targetEntity = cCompRightNorm.class, optional = false)
     private cCompRightNorm compRightNorm;
 
-    @ManyToOne(targetEntity = cServiceSection.class,optional=false)
+    @ManyToOne(targetEntity = cServiceSection.class, optional = false)
     private cServiceSection c_serviceSection;
 
     public sCompany() {
@@ -80,5 +84,17 @@ public class sCompany {
 
     public void setC_serviceSection(cServiceSection c_serviceSection) {
         this.c_serviceSection = c_serviceSection;
+    }
+
+    @Override
+    public String toString() {
+        return "sCompany{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", address=" + address +
+                ", phone='" + phone + '\'' +
+                ", compRightNorm=" + compRightNorm +
+                ", c_serviceSection=" + c_serviceSection +
+                '}';
     }
 }

@@ -40,4 +40,13 @@ public class AddressJsonb implements Serializable {
     public void setOfficeNumber(String officeNumber) {
         this.officeNumber = officeNumber;
     }
+
+    @Override
+    public String toString() {
+        return "AddressJsonb{" +
+                "streetName='" + streetName + '\'' +
+                ", houseNumber='" + houseNumber + '\'' +
+                ", officeNumber='" + officeNumber + '\'' +
+                '}';
+    }
 }

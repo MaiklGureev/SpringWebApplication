@@ -1,5 +1,8 @@
 package com.gureev.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.transaction.annotation.Transactional;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,7 +12,8 @@ public class cCompRightNorm {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany(mappedBy = "compRightNorm",fetch = FetchType.LAZY,orphanRemoval = true)
+    @JsonIgnore
+    @OneToMany(mappedBy = "compRightNorm",orphanRemoval = true)
     private List<sCompany> s_companies;
 
     private String name;
@@ -43,5 +47,13 @@ public class cCompRightNorm {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "cCompRightNorm{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }

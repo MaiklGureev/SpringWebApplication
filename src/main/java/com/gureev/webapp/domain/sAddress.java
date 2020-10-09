@@ -1,20 +1,25 @@
 package com.gureev.webapp.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
+import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Entity
+@Transactional
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class sAddress {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "address",fetch = FetchType.LAZY, orphanRemoval = true,cascade = CascadeType.ALL)
+    @JsonIgnore
+    @OneToMany(mappedBy = "address", orphanRemoval = true,cascade = CascadeType.ALL)
     private List<sCompany> s_companies;
 
     @Type(type = "jsonb")
@@ -51,5 +56,13 @@ public class sAddress {
 
     public void setAddressJsonb(AddressJsonb addressJsonb) {
         this.addressJsonb = addressJsonb;
+    }
+
+    @Override
+    public String toString() {
+        return "sAddress{" +
+                "id=" + id +
+                ", addressJsonb=" + addressJsonb +
+                '}';
     }
 }
