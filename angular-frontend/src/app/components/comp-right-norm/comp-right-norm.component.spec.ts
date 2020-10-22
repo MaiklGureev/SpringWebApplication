@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { CompRightNormComponent } from './comp-right-norm.component';
+import {CompRightNormComponent} from './comp-right-norm.component';
 
 describe('CompRightNormComponent', () => {
   let component: CompRightNormComponent;

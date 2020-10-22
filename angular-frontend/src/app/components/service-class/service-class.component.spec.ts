@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ServiceClassComponent } from './service-class.component';
+import {ServiceClassComponent} from './service-class.component';
 
 describe('ServiceClassComponent', () => {
   let component: ServiceClassComponent;

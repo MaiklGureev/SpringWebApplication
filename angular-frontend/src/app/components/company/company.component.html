@@ -1,1 +1,124 @@
-<p>company works!</p>
+<div align="center">
+  <table class="table table-bordered">
+    <caption>List of companies</caption>
+    <thead>
+    <tr>
+      <th scope="col">Орг.прав.норма</th>
+      <th scope="col">Название</th>
+      <th scope="col">Адрес</th>
+      <th scope="col">Телефон</th>
+      <th scope="col">Раздел деятельности</th>
+      <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let comp of companies">
+
+      <td id="col0">{{comp.compRightNorm.name}}</td>
+      <td id="col1">{{comp.name}}</td>
+      <td id="col2">г.{{comp.address.addressJsonb.cityName}},
+        улица {{comp.address.addressJsonb.streetName}} {{comp.address.addressJsonb.houseNumber}},
+        офис {{comp.address.addressJsonb.officeNumber}}</td>
+      <td id="col4">{{comp.phone}}</td>
+      <td id="col3">{{comp.c_serviceSection.name}}</td>
+      <td id="col5">
+
+        <button type="button"
+                (click)="openEditModal(comp.id)"
+                class="btn btn-primary btn-sm btn-block"
+                data-toggle="modal"
+                data-target="#editCompModal">Редактировать
+        </button>
+
+        <button type="button" [disabled]="isLoading" (click)="deleteCompany(comp.id)"
+                class="btn btn-danger btn-sm btn-block">Удалить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editCompModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="editController">
+
+        <form name="editForm">
+
+          <div class="form-group">
+            <label for="company-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="compName" name="compName"  type="text" class="form-control" id="company-name">
+          </div>
+
+          <div class="form-group">
+            <label for="company-phone" class="col-form-label">Телефон:</label>
+            <input [(ngModel)]="phone" name="phone" type="text" class="form-control" id="company-phone">
+          </div>
+
+          <div class="form-group">
+            <label for="company-org-right-norm-select" class="col-form-label">Организационно правовая норма:</label>
+
+            <select
+              type="text"
+              class="form-control"
+              id="company-org-right-norm-select">
+              <option
+                *ngFor="let value of crn"
+                [selected]="selectedCRNValue?.id == value.id"
+                (click)="changedCRNId = value.id">{{value.name}}</option>
+            </select>
+
+          </div>
+
+          <div class="form-group">
+
+            <label for="company-address-select" class="col-form-label">Адрес:</label>
+
+            <select
+              type="text"
+              class="form-control"
+              id="company-address-select">
+              <option
+                *ngFor="let value of address"
+                [selected]="selectedAddressValue?.id == value.id"
+                (click)="changedAddressId = value.id">г.{{value.addressJsonb.cityName}},
+                улица {{value.addressJsonb.streetName}} {{value.addressJsonb.houseNumber}},
+                офис {{value.addressJsonb.officeNumber}}</option>
+            </select>
+
+          </div>
+
+          <div class="form-group">
+            <label for="company-service-select" class="col-form-label">Раздел деятельности:</label>
+
+            <select
+              type="text"
+              class="form-control"
+              id="company-service-select">
+              <option
+                *ngFor="let value of ss"
+                [selected]="selectedSSValue?.id == value.id"
+                (click)="changedSSId = value.id">{{value.name}}</option>
+            </select>
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
