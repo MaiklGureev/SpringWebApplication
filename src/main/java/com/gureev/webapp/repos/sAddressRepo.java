@@ -1,13 +1,13 @@
 package com.gureev.webapp.repos;
 
-import com.gureev.webapp.domain.sAddress;
+import com.gureev.webapp.model.sAddress;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.Optional;
 
-public interface sAddressRepo extends CrudRepository<sAddress,Integer> {
+public interface sAddressRepo extends CrudRepository<sAddress,Long> {
 
     void deleteById(Long id);
 
-    sAddress findById(Long id);
+    Optional<sAddress> findById(Long id);
 }

@@ -1,14 +1,12 @@
 package com.gureev.webapp.repos;
 
-import com.gureev.webapp.domain.sCompany;
-import org.springframework.data.jpa.repository.Query;
+import com.gureev.webapp.model.sCompany;
 import org.springframework.data.repository.CrudRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface sCompanyRepo extends CrudRepository<sCompany,Integer> {
+public interface sCompanyRepo extends CrudRepository<sCompany,Long> {
 
-    sCompany findById(Long id);
+    Optional<sCompany> findById(Long id);
     void deleteById(Long id);
 }

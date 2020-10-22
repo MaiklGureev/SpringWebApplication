@@ -1,7 +1,6 @@
-package com.gureev.webapp.domain;
+package com.gureev.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 
@@ -12,7 +11,7 @@ public class cServiceClass {
     private long id;
 
     @JsonIgnore
-    @ManyToOne(targetEntity = cServiceSection.class, optional = false, cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, optional = false)
     private cServiceSection c_Service_section;
 
     private String code;

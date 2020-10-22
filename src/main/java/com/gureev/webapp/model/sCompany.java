@@ -1,10 +1,6 @@
-package com.gureev.webapp.domain;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.Bean;
+package com.gureev.webapp.model;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 
 @Entity
 public class sCompany {

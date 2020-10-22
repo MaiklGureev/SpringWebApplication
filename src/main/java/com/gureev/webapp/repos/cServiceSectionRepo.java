@@ -1,11 +1,12 @@
 package com.gureev.webapp.repos;
 
-import com.gureev.webapp.domain.cServiceSection;
-import org.springframework.data.jpa.repository.Query;
+import com.gureev.webapp.model.cServiceSection;
 import org.springframework.data.repository.CrudRepository;
 
-public interface cServiceSectionRepo extends CrudRepository<cServiceSection,Integer> {
+import java.util.Optional;
+
+public interface cServiceSectionRepo extends CrudRepository<cServiceSection,Long> {
 
     void deleteById(Long id);
-    cServiceSection findById(Long id);
+    Optional<cServiceSection> findById(Long id);
 }

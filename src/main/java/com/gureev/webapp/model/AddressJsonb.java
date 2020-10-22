@@ -1,9 +1,11 @@
-package com.gureev.webapp.domain;
+package com.gureev.webapp.model;
 
 import java.io.Serializable;
 
 
 public class AddressJsonb implements Serializable {
+
+    public String cityName;
     public String streetName;
     public String houseNumber;
     public String officeNumber;
@@ -11,7 +13,8 @@ public class AddressJsonb implements Serializable {
     public AddressJsonb() {
     }
 
-    public AddressJsonb(String streetName, String houseNumber, String officeNumber) {
+    public AddressJsonb( String cityName, String streetName, String houseNumber, String officeNumber) {
+        this.cityName = cityName;
         this.streetName = streetName;
         this.houseNumber = houseNumber;
         this.officeNumber = officeNumber;
@@ -41,10 +44,21 @@ public class AddressJsonb implements Serializable {
         this.officeNumber = officeNumber;
     }
 
+
+
+    public String getCityName() {
+        return cityName;
+    }
+
+    public void setCityName(String cityName) {
+        this.cityName = cityName;
+    }
+
     @Override
     public String toString() {
         return "AddressJsonb{" +
-                "streetName='" + streetName + '\'' +
+                ", cityName='" + cityName + '\'' +
+                ", streetName='" + streetName + '\'' +
                 ", houseNumber='" + houseNumber + '\'' +
                 ", officeNumber='" + officeNumber + '\'' +
                 '}';

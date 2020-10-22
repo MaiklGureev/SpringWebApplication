@@ -1,17 +1,18 @@
 package com.gureev.webapp.controller;
 
 
-import com.gureev.webapp.domain.cServiceSection;
-import com.gureev.webapp.domain.sAddress;
+import com.gureev.webapp.model.sAddress;
 import com.gureev.webapp.repos.sAddressRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping()
 public class sAddressController {
     private final sAddressRepo addressRepo;
 
@@ -21,49 +22,45 @@ public class sAddressController {
 
     @PostMapping("/Address/save")
     public ResponseEntity saveAddress(@RequestBody sAddress address) {
-        try{
+        try {
             addressRepo.save(address);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
         }
     }
 
     @GetMapping("/Address/all")
-    public ResponseEntity  getCompanies() {
-        try{
+    public ResponseEntity getCompanies() {
+        try {
             List<sAddress> list = (List<sAddress>) addressRepo.findAll();
-            if(!list.isEmpty()){
-                return new ResponseEntity(list,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(list, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/Address/byId")
     public ResponseEntity getAddress(@RequestParam Long id) {
-        try{
-            sAddress entity = addressRepo.findById(id);
-            if(entity!=null){
-                return new ResponseEntity(entity,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+        try {
+            sAddress entity = addressRepo.findById(id).get();
+            return new ResponseEntity(entity, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entity not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
     @DeleteMapping("/Address/del")
     public ResponseEntity deleteAddressById(@RequestParam Long id) {
-        try{
+        try {
             addressRepo.deleteById(id);
-            return new ResponseEntity("Deleted!",HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity( HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not modified!", HttpStatus.NOT_MODIFIED);
         }
     }
 }

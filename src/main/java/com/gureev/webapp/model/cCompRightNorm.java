@@ -1,7 +1,6 @@
-package com.gureev.webapp.domain;
+package com.gureev.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.*;
 import java.util.List;

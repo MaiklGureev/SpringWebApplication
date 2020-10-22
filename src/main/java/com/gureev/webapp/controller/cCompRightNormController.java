@@ -1,20 +1,17 @@
 package com.gureev.webapp.controller;
 
-import com.gureev.webapp.domain.cCompRightNorm;
-import com.gureev.webapp.domain.sCompany;
+import com.gureev.webapp.model.cCompRightNorm;
 import com.gureev.webapp.repos.cCompRightNormRepo;
-import com.gureev.webapp.repos.sCompanyRepo;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+import java.util.NoSuchElementException;
 
-@CrossOrigin
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping()
 public class cCompRightNormController {
     private final cCompRightNormRepo compRightNormRepo;
 
@@ -27,8 +24,8 @@ public class cCompRightNormController {
         try{
             compRightNormRepo.save(compRightNorm);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
         }
     }
 
@@ -36,27 +33,23 @@ public class cCompRightNormController {
     public ResponseEntity  getCompRightNorms() {
         try{
             List<cCompRightNorm> list = (List<cCompRightNorm>) compRightNormRepo.findAll();
-            if(!list.isEmpty()){
-                return new ResponseEntity(list,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(list, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/CompRightNorm/ById")
     public ResponseEntity getCompRightNorm(@RequestParam Long id) {
         try{
-            cCompRightNorm entity = compRightNormRepo.findById(id);
-            if(entity!=null){
-                return new ResponseEntity(entity,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            cCompRightNorm entity = compRightNormRepo.findById(id).get();
+            return new ResponseEntity(entity, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entity not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -64,9 +57,9 @@ public class cCompRightNormController {
     public ResponseEntity deleteCompRightNorm(@RequestParam Long id) {
         try{
             compRightNormRepo.deleteById(id);
-            return new ResponseEntity("Deleted!",HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not modified!", HttpStatus.NOT_MODIFIED);
         }
     }
 }

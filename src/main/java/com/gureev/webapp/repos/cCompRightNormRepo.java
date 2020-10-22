@@ -1,12 +1,14 @@
 package com.gureev.webapp.repos;
 
-import com.gureev.webapp.domain.cCompRightNorm;
+import com.gureev.webapp.model.cCompRightNorm;
 import org.springframework.data.repository.CrudRepository;
 
-public interface cCompRightNormRepo extends CrudRepository<cCompRightNorm,Integer> {
+import java.util.Optional;
+
+public interface cCompRightNormRepo extends CrudRepository<cCompRightNorm,Long> {
 
 
-    cCompRightNorm findById(Long id);
+    Optional<cCompRightNorm> findById(Long id);
 
     void deleteById(Long id);
 }

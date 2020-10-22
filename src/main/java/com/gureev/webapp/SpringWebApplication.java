@@ -1,14 +1,12 @@
 package com.gureev.webapp;
 
-import com.gureev.webapp.domain.sCompany;
+
+import com.gureev.webapp.model.*;
 import com.gureev.webapp.repos.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
 
 @SpringBootApplication
 public class SpringWebApplication {
@@ -29,30 +27,30 @@ public class SpringWebApplication {
                                   sCompanyRepo sCompanyRepo) {
         return args -> {
 
-//            //разделы
-//            for (cServiceSection serviceSection : initDatabaseUtil.getcServiceSections()) {
-//                cServiceSectionRepo.save(serviceSection);
-//            }
-//
-//            //классы
-//            for (cServiceClass cServiceClass : initDatabaseUtil.getcServiceClasses()) {
-//                cServiceClassRepo.save(cServiceClass);
-//            }
-//
-//            //правовые нормы предприятия
-//            for (cCompRightNorm cCompRightNorm : initDatabaseUtil.getcCompRightNorms()) {
-//                cCompRightNormRepo.save(cCompRightNorm);
-//            }
-//
-//            //адреса компаний
-//            for (sAddress sAddress : initDatabaseUtil.getsAddresses()) {
-//                sAddressRepo.save(sAddress);
-//            }
-//
-//            //компании
-//            for (sCompany sCompany : initDatabaseUtil.getsCompanies()) {
-//                sCompanyRepo.save(sCompany);
-//            }
+            //разделы
+            for (cServiceSection ss : initDatabaseUtil.getSs()) {
+                cServiceSectionRepo.save(ss);
+            }
+
+            //классы
+            for (cServiceClass sc : initDatabaseUtil.getSc()) {
+                cServiceClassRepo.save(sc);
+            }
+
+            //правовые нормы предприятия
+            for (cCompRightNorm crn : initDatabaseUtil.getCrn()) {
+                cCompRightNormRepo.save(crn);
+            }
+
+            //адреса компаний
+            for (sAddress sAddress : initDatabaseUtil.getAdr()) {
+                sAddressRepo.save(sAddress);
+            }
+
+            //компании
+            for (sCompany comp : initDatabaseUtil.getComp()) {
+                sCompanyRepo.save(comp);
+            }
 
 //            sAddress address10 = new sAddress(10, new AddressJsonb("Бубнова", "11", "9"));
 //            cCompRightNorm compRightNorm3 = new cCompRightNorm("ООО");

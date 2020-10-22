@@ -1,11 +1,8 @@
-package com.gureev.webapp.domain;
+package com.gureev.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jdk.nashorn.internal.ir.annotations.Ignore;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
-import javax.transaction.Transactional;
 import java.util.List;
 
 @Entity
@@ -15,20 +12,11 @@ public class cServiceSection {
     private long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "c_serviceSection",
-            cascade = CascadeType.REMOVE,orphanRemoval = true)
+    @OneToMany(mappedBy = "c_serviceSection")
     private List<sCompany> s_companies;
 
-    public List<cServiceClass> getcServiceClasses() {
-        return cServiceClasses;
-    }
-
-    public void setcServiceClasses(List<cServiceClass> cServiceClasses) {
-        this.cServiceClasses = cServiceClasses;
-    }
-
-    @OneToMany(mappedBy = "c_Service_section",orphanRemoval = true)
-    private List<cServiceClass> cServiceClasses;
+    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.ALL}, mappedBy = "c_Service_section")
+    private List<cServiceClass> c_ServiceClasses;
 
     private String name;
 
@@ -48,6 +36,19 @@ public class cServiceSection {
         this.id = id;
     }
 
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public List<cServiceClass> getcServiceClasses() {
+        return c_ServiceClasses;
+    }
+
     public List<sCompany> getS_companies() {
         return s_companies;
     }
@@ -56,12 +57,12 @@ public class cServiceSection {
         this.s_companies = s_companies;
     }
 
-    public String getName() {
-        return name;
+    public List<cServiceClass> getC_ServiceClasses() {
+        return c_ServiceClasses;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setC_ServiceClasses(List<cServiceClass> c_ServiceClasses) {
+        this.c_ServiceClasses = c_ServiceClasses;
     }
 
     @Override

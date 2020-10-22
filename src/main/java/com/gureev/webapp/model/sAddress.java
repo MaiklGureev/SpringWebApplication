@@ -1,10 +1,9 @@
-package com.gureev.webapp.domain;
+package com.gureev.webapp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
-import org.springframework.context.annotation.Bean;
 
 import javax.persistence.*;
 import javax.transaction.Transactional;

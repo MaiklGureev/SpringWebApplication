@@ -1,17 +1,17 @@
 package com.gureev.webapp.controller;
 
-import com.gureev.webapp.domain.cServiceClass;
-import com.gureev.webapp.domain.cServiceSection;
-import com.gureev.webapp.domain.sCompany;
+import com.gureev.webapp.model.cServiceSection;
 import com.gureev.webapp.repos.cServiceSectionRepo;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200")
+@RequestMapping()
 public class cServiceSectionController {
     private final cServiceSectionRepo serviceSectionRepo;
 
@@ -24,8 +24,8 @@ public class cServiceSectionController {
         try{
             serviceSectionRepo.save(serviceSection);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
         }
     }
 
@@ -33,27 +33,23 @@ public class cServiceSectionController {
     public ResponseEntity  getCompanies() {
         try{
             List<cServiceSection> list = (List<cServiceSection>) serviceSectionRepo.findAll();
-            if(!list.isEmpty()){
-                return new ResponseEntity(list,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(list, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping("/ServiceSection/byId")
     public ResponseEntity getServiceSection(@RequestParam Long id) {
         try{
-            cServiceSection entity = serviceSectionRepo.findById(id);
-            if(entity!=null){
-                return new ResponseEntity(entity,HttpStatus.OK);
-            }else {
-                return new ResponseEntity(HttpStatus.NOT_FOUND);
-            }
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.BAD_REQUEST);
+            cServiceSection entity = serviceSectionRepo.findById(id).get();
+            return new ResponseEntity(entity, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+            return new ResponseEntity("Entity not found!", HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity("Bad request!", HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -61,9 +57,9 @@ public class cServiceSectionController {
     public ResponseEntity deleteServiceSectionById(@RequestParam Long id) {
         try{
             serviceSectionRepo.deleteById(id);
-            return new ResponseEntity("Deleted!",HttpStatus.OK);
-        }catch (Exception e){
-            return new ResponseEntity(HttpStatus.NOT_MODIFIED);
+            return new ResponseEntity( HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity("Entity not modified!", HttpStatus.NOT_MODIFIED);
         }
     }
 
