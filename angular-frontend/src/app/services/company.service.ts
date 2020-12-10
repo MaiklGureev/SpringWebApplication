@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Company} from '../models/company';
 
@@ -17,18 +17,33 @@ export class CompanyService {
   }
 
   public getCompanyById(id: number): Observable<any> {
-    return this.http.get('http://localhost:8080/Company/byId', {params: new HttpParams().set('id', String(id))});
+    const headerAuth = new HttpHeaders({Authorization: 'Basic ' + sessionStorage.getItem('token')});
+    return this.http.get('http://localhost:8080/Company/byId', {
+      headers: headerAuth,
+      responseType: 'text' as 'json',
+      params: new HttpParams().set('id', String(id))
+    });
   }
 
   public getCompaniesList(): Observable<any> {
-    return this.http.get('http://localhost:8080/Company/all');
+    const headerAuth = new HttpHeaders({Authorization: 'Basic ' + sessionStorage.getItem('token')});
+    return this.http.get('http://localhost:8080/Company/all', {headers: headerAuth, responseType: 'text' as 'json'});
   }
 
   public delCompanyById(id: number): Observable<any> {
-    return this.http.delete('http://localhost:8080/Company/del', {params: new HttpParams().set('id', String(id))});
+    const headerAuth = new HttpHeaders({Authorization: 'Basic ' + sessionStorage.getItem('token')});
+    return this.http.delete('http://localhost:8080/Company/del', {
+      headers: headerAuth,
+      responseType: 'text' as 'json',
+      params: new HttpParams().set('id', String(id))
+    });
   }
 
   public saveCompany(comp: Company): Observable<any> {
-    return this.http.post('http://localhost:8080/Company/save', comp);
+    const headerAuth = new HttpHeaders({Authorization: 'Basic ' + sessionStorage.getItem('token')});
+    return this.http.post('http://localhost:8080/Company/save', comp, {
+      headers: headerAuth,
+      responseType: 'text' as 'json'
+    });
   }
 }

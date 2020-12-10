@@ -1,1 +1,107 @@
-<p>comp-right-norm works!</p>
+<div align="right" id="btnAddNew">
+  <button type="button"
+          (click)="openAddModal()"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addCRNModal">Добавить новую организационно правовую норму в справочник
+  </button>
+</div>
+
+<div align="center">
+  <table class="table table-bordered">
+    <caption>List of company right norm</caption>
+    <thead>
+    <tr>
+      <th scope="col">Название</th>
+      <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of crn ">
+
+      <td id="col1">{{c.name}}</td>
+      <td id="col5">
+
+        <button type="button"
+                (click)="openEditModal(c.id)"
+                class="btn btn-primary btn-sm btn-block"
+                data-toggle="modal"
+                data-target="#editCRNModal">Редактировать
+        </button>
+
+        <button type="button" (click)="deleteCRN(c.id)"
+                class="btn btn-danger btn-sm btn-block">Удалить
+        </button>
+
+      </td>
+
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editCRNModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="editController">
+
+        <form name="editForm">
+
+          <div class="form-group">
+            <label for="crn-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="nameCRN" name="nameCRN" type="text" class="form-control" id="crn-name">
+          </div>
+
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addCRNModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="addController">
+
+        <form name="addForm">
+
+          <div class="form-group">
+            <label for="add-crn-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="nameCRN" name="nameCRN" type="text" class="form-control" id="add-crn-name">
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>

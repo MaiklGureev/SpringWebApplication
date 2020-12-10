@@ -1,1 +1,105 @@
-<p>service-section works!</p>
+<div align="right" id="btnAddNew">
+  <button type="button"
+          (click)="openAddModal()"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addServSectModal">Добавить новый раздел в справочник
+  </button>
+</div>
+
+<div align="center">
+  <table class="table table-bordered">
+    <caption>List of service sections</caption>
+    <thead>
+    <tr>
+      <th scope="col">Название раздела</th>
+      <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let servSect of serviceSections ">
+      <td id="col1">{{servSect.name}}</td>
+      <td id="col3">
+
+        <button type="button"
+                (click)="openEditModal(servSect.id)"
+                class="btn btn-primary btn-sm btn-block"
+                data-toggle="modal"
+                data-target="#editServSectModal">Редактировать
+        </button>
+
+        <button type="button" (click)="deleteServSection(servSect.id)"
+                class="btn btn-danger btn-sm btn-block">Удалить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editServSectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="editController">
+
+        <form name="editForm">
+
+          <div class="form-group">
+            <label for="serv-sect-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="nameSS" name="nameSS" type="text" class="form-control" id="serv-sect-name">
+          </div>
+
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addServSectModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="addController">
+
+        <form name="addForm">
+
+          <div class="form-group">
+            <label for="add-serv-sect-name" class="col-form-label">Название:</label>
+            <input [(ngModel)]="nameSS" name="nameSS" type="text" class="form-control" id="add-serv-sect-name">
+          </div>
+
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>

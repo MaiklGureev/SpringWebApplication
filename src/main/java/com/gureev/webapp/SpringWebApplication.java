@@ -52,18 +52,6 @@ public class SpringWebApplication {
                 sCompanyRepo.save(comp);
             }
 
-//            sAddress address10 = new sAddress(10, new AddressJsonb("Бубнова", "11", "9"));
-//            cCompRightNorm compRightNorm3 = new cCompRightNorm("ООО");
-//            compRightNorm3.setId(3);
-//            cServiceSection section4 = new cServiceSection(4, "Строительство");
-//            sCompany sCompany = new sCompany("СройДом", address10, "635546", compRightNorm3, section4);
-//            sCompany.setId(11l);
-//            sCompanyRepo.delete(sCompany);
-
-//            List<sCompany> sCompanyList = (List<sCompany>) sCompanyRepo.findAll();
-//            for (int i = 0; i < sCompanyList.size(); i++) {
-//                System.out.println(sCompanyList.get(i).toString());
-//            }
         };
     }
 

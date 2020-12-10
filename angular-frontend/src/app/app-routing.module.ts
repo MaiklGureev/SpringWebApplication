@@ -6,9 +6,12 @@ import {ServiceClassComponent} from './components/service-class/service-class.co
 import {ServiceSectionComponent} from './components/service-section/service-section.component';
 import {CompRightNormComponent} from './components/comp-right-norm/comp-right-norm.component';
 import {CompanyComponent} from './components/company/company.component';
+import {LoginComponent} from './components/login/login.component';
 
 const routes: Routes = [
-  {path: '', component: WelcomeComponent},
+  {path: '', component: LoginComponent},
+  {path: 'login', component: LoginComponent},
+  {path: 'welcome', component: WelcomeComponent},
   {path: 'address', component: AddressComponent},
   {path: 'sc', component: ServiceClassComponent},
   {path: 'ss', component: ServiceSectionComponent},
@@ -20,4 +23,5 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
+
 }

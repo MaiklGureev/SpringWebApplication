@@ -9,29 +9,28 @@ public class sCompany {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @ManyToOne(targetEntity = sAddress.class, optional = false, cascade = CascadeType.REMOVE)
+    @ManyToOne(targetEntity = sAddress.class, optional = false, cascade = {CascadeType.REFRESH})
     private sAddress address;
 
     private String phone;
 
-    @ManyToOne(targetEntity = cCompRightNorm.class, optional = false)
+    @ManyToOne(targetEntity = cCompRightNorm.class, optional = false, cascade = {CascadeType.REFRESH})
     private cCompRightNorm compRightNorm;
 
-    @ManyToOne(targetEntity = cServiceSection.class, optional = false)
-    private cServiceSection c_serviceSection;
+    @ManyToOne(targetEntity = cServiceSection.class, optional = false, cascade = {CascadeType.REFRESH})
+    private cServiceSection serviceSection;
 
     public sCompany() {
     }
 
-    public sCompany(String name, sAddress address, String phone, cCompRightNorm compRightNorm, cServiceSection c_serviceSection) {
+    public sCompany(String name, sAddress address, String phone, cCompRightNorm compRightNorm, cServiceSection serviceSection) {
         this.name = name;
         this.address = address;
         this.phone = phone;
         this.compRightNorm = compRightNorm;
-        this.c_serviceSection = c_serviceSection;
+        this.serviceSection = serviceSection;
     }
 
     public long getId() {
@@ -74,12 +73,12 @@ public class sCompany {
         this.compRightNorm = compRightNorm;
     }
 
-    public cServiceSection getC_serviceSection() {
-        return c_serviceSection;
+    public cServiceSection getServiceSection() {
+        return serviceSection;
     }
 
-    public void setC_serviceSection(cServiceSection c_serviceSection) {
-        this.c_serviceSection = c_serviceSection;
+    public void setServiceSection(cServiceSection serviceSection) {
+        this.serviceSection = serviceSection;
     }
 
     @Override
@@ -90,7 +89,7 @@ public class sCompany {
                 ", address=" + address +
                 ", phone='" + phone + '\'' +
                 ", compRightNorm=" + compRightNorm +
-                ", c_serviceSection=" + c_serviceSection +
+                ", serviceSection=" + serviceSection +
                 '}';
     }
 }

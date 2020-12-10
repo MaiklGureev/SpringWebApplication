@@ -3,12 +3,16 @@ button {
   margin: 1%;
 }
 
-TABLE {
+table {
   vertical-align: center;
   align-self: center;
   align-items: center;
   align-content: center;
   width: 95%;
+}
+
+#btnAddNew {
+  margin-right: 2%;
 }
 
 /*#col1 {*/

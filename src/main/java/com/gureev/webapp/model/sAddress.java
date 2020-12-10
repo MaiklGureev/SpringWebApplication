@@ -14,12 +14,12 @@ import java.util.List;
 @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
 public class sAddress {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "address", orphanRemoval = true,cascade = CascadeType.ALL)
-    private List<sCompany> s_companies;
+    @OneToMany(mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<sCompany> companies;
 
     @Type(type = "jsonb")
     @Column(columnDefinition = "jsonb")
@@ -41,12 +41,12 @@ public class sAddress {
         this.id = id;
     }
 
-    public List<sCompany> getS_companies() {
-        return s_companies;
+    public List<sCompany> getCompanies() {
+        return companies;
     }
 
-    public void setS_companies(List<sCompany> s_companies) {
-        this.s_companies = s_companies;
+    public void setCompanies(List<sCompany> companies) {
+        this.companies = companies;
     }
 
     public AddressJsonb getAddressJsonb() {

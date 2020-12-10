@@ -1,4 +1,4 @@
-import {AddressJson} from "./addressJson";
+import {AddressJson} from './addressJson';
 
 export class Address {
   id: number;

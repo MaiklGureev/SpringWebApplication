@@ -1,1 +1,159 @@
-<p>service-class works!</p>
+<div align="right" id="btnAddNew">
+  <button type="button"
+          (click)="openAddModal()"
+          class="btn btn-primary"
+          data-toggle="modal"
+          data-target="#addServClassModal">Добавить новый класс в справочник
+  </button>
+</div>
+
+<div align="center">
+  <table class="table table-bordered">
+    <caption>List of service classes</caption>
+    <thead>
+    <tr>
+      <th scope="col">Код</th>
+      <th scope="col">Описание</th>
+      <th scope="col">Раздел</th>
+      <th scope="col">Действия</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let serviceClass of serviceClasses ">
+      <td id="col1">{{serviceClass.code}}</td>
+      <td id="col2">{{serviceClass.description}}</td>
+      <td id="col3">
+        {{serviceClass.serviceSection.name}}
+      </td>
+      <td id="col4">
+
+        <button type="button"
+                (click)="openEditModal(serviceClass.id)"
+                class="btn btn-primary btn-sm btn-block"
+                data-toggle="modal"
+                data-target="#editServClassModal">Редактировать
+        </button>
+
+        <button type="button" (click)="deleteServiceClass(serviceClass.id)"
+                class="btn btn-danger btn-sm btn-block">Удалить
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="editServClassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редактировать запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="editController">
+
+        <form name="editForm">
+
+          <div class="form-group">
+            <label for="serv-class-code" class="col-form-label">Код:</label>
+            <input [(ngModel)]="codeSC" name="codeSC" type="text" class="form-control" id="serv-class-code">
+          </div>
+
+          <div class="form-group">
+            <label for="serv-class-description" class="col-form-label">Описание:</label>
+            <input [(ngModel)]="descriptionSC" name="descriptionSC" type="text" class="form-control"
+                   id="serv-class-description">
+          </div>
+
+          <div class="form-group">
+
+            <label for="edit-service-section-select" class="col-form-label">Раздел:</label>
+
+            <select
+              type="text"
+              class="form-control"
+              id="edit-service-section-select">
+              <option
+                *ngFor="let value of serviceSections"
+                [selected]="selectedSSValue?.id == value.id"
+                (click)="changedSSId = value.id">
+                {{value.name}}
+              </option>
+            </select>
+
+          </div>
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addServClassModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Добавить запись</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" ng-controller="addController">
+
+        <form name="addForm">
+
+          <div class="form-group">
+            <label for="add-serv-class-code" class="col-form-label">Код:</label>
+            <input [(ngModel)]="codeSC" name="codeSC" type="text" class="form-control" id="add-serv-class-code">
+          </div>
+
+          <div class="form-group">
+            <label for="add-serv-class-description" class="col-form-label">Описание:</label>
+            <input [(ngModel)]="descriptionSC" name="descriptionSC" type="text" class="form-control"
+                   id="add-serv-class-description">
+          </div>
+
+          <div class="form-group">
+
+            <label for="add-service-section-select" class="col-form-label">Раздел:</label>
+
+            <select
+              type="text"
+              class="form-control"
+              id="add-service-section-select">
+              <option
+                *ngFor="let value of serviceSections"
+                [selected]="selectedSSValue?.id == value.id"
+                (click)="changedSSId = value.id">
+                {{value.name}}
+              </option>
+            </select>
+
+          </div>
+
+
+        </form>
+
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="saveChanges()" data-dismiss="modal">Save changes</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+

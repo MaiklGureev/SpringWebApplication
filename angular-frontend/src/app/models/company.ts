@@ -8,6 +8,6 @@ export class Company {
   name: string;
   phone: string;
   address: Address;
-  c_serviceSection: ServiceSection;
+  serviceSection: ServiceSection;
   compRightNorm: CompRightNorm;
 }

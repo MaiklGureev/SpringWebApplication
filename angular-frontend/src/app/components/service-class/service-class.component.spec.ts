@@ -8,9 +8,9 @@ describe('ServiceClassComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ServiceClassComponent ]
+      declarations: [ServiceClassComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

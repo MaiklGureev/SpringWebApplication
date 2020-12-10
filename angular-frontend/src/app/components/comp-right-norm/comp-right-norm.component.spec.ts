@@ -8,9 +8,9 @@ describe('CompRightNormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CompRightNormComponent ]
+      declarations: [CompRightNormComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

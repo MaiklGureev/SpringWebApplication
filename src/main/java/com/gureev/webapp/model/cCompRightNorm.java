@@ -8,11 +8,11 @@ import java.util.List;
 @Entity
 public class cCompRightNorm {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "compRightNorm",orphanRemoval = true)
+    @OneToMany(mappedBy = "compRightNorm", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private List<sCompany> s_companies;
 
     private String name;

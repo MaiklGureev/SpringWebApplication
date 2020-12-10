@@ -11,7 +11,9 @@ import {CompanyComponent} from './components/company/company.component';
 import {WelcomeComponent} from './components/welcome/welcome.component';
 import {HttpClientModule} from '@angular/common/http';
 import {CommonModule} from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {LoginComponent} from './components/login/login.component';
+import {HeaderComponent} from './components/header/header.component';
 
 enableProdMode();
 
@@ -23,7 +25,9 @@ enableProdMode();
     ServiceSectionComponent,
     CompRightNormComponent,
     CompanyComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    LoginComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,

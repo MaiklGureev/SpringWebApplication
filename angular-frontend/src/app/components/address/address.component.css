@@ -1,0 +1,15 @@
+button {
+  margin: 1%;
+}
+
+table {
+  vertical-align: center;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  width: 50%;
+}
+
+#btnAddNew {
+  margin-right: 2%;
+}

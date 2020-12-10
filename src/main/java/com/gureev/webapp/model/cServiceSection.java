@@ -8,22 +8,23 @@ import java.util.List;
 @Entity
 public class cServiceSection {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "c_serviceSection")
-    private List<sCompany> s_companies;
+    @OneToMany(mappedBy = "serviceSection", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<sCompany> companies;
 
-    @OneToMany(cascade = {CascadeType.REMOVE, CascadeType.ALL}, mappedBy = "c_Service_section")
-    private List<cServiceClass> c_ServiceClasses;
+    @JsonIgnore
+    @OneToMany(mappedBy = "serviceSection", cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
+    private List<cServiceClass> serviceClasses;
 
     private String name;
 
     public cServiceSection() {
     }
 
-    public cServiceSection(long id,String name) {
+    public cServiceSection(long id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -36,6 +37,21 @@ public class cServiceSection {
         this.id = id;
     }
 
+    public List<sCompany> getCompanies() {
+        return companies;
+    }
+
+    public void setCompanies(List<sCompany> companies) {
+        this.companies = companies;
+    }
+
+    public List<cServiceClass> getServiceClasses() {
+        return serviceClasses;
+    }
+
+    public void setServiceClasses(List<cServiceClass> serviceClasses) {
+        this.serviceClasses = serviceClasses;
+    }
 
     public String getName() {
         return name;
@@ -43,26 +59,6 @@ public class cServiceSection {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<cServiceClass> getcServiceClasses() {
-        return c_ServiceClasses;
-    }
-
-    public List<sCompany> getS_companies() {
-        return s_companies;
-    }
-
-    public void setS_companies(List<sCompany> s_companies) {
-        this.s_companies = s_companies;
-    }
-
-    public List<cServiceClass> getC_ServiceClasses() {
-        return c_ServiceClasses;
-    }
-
-    public void setC_ServiceClasses(List<cServiceClass> c_ServiceClasses) {
-        this.c_ServiceClasses = c_ServiceClasses;
     }
 
     @Override

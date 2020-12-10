@@ -25,7 +25,7 @@ public class sCompanyController {
     public ResponseEntity saveCompany(@RequestBody sCompany company) {
         try {
             sCompanyRepo.save(company);
-            return new ResponseEntity( HttpStatus.OK);
+            return new ResponseEntity(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
         }
@@ -35,7 +35,14 @@ public class sCompanyController {
     public ResponseEntity getCompanies() {
         try {
             List<sCompany> list = (List<sCompany>) sCompanyRepo.findAll();
-            return new ResponseEntity(list, HttpStatus.OK);
+            list.sort((o1, o2) -> {
+                if (o1.getId() > o2.getId()) {
+                    return -1;
+                }
+                return 1;
+            });
+            ResponseEntity r = new ResponseEntity(list, HttpStatus.OK);
+            return r;
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);
         } catch (Exception e) {

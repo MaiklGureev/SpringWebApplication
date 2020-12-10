@@ -22,18 +22,24 @@ public class sAddressController {
 
     @PostMapping("/Address/save")
     public ResponseEntity saveAddress(@RequestBody sAddress address) {
-        try {
-            addressRepo.save(address);
-            return new ResponseEntity(HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
-        }
+//        try {
+        addressRepo.save(address);
+        return new ResponseEntity(HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity("Entity not saved!", HttpStatus.NOT_MODIFIED);
+//        }
     }
 
     @GetMapping("/Address/all")
     public ResponseEntity getCompanies() {
         try {
             List<sAddress> list = (List<sAddress>) addressRepo.findAll();
+            list.sort((o1, o2) -> {
+                if (o1.getId() > o2.getId()) {
+                    return -1;
+                }
+                return 1;
+            });
             return new ResponseEntity(list, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);

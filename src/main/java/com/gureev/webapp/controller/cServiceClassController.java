@@ -33,7 +33,14 @@ public class cServiceClassController {
     public ResponseEntity  getCompanies() {
         try{
             List<cServiceClass> list = (List<cServiceClass>) serviceClassRepo.findAll();
-            return new ResponseEntity(list, HttpStatus.OK);
+            list.sort((o1, o2) -> {
+                if (o1.getId() > o2.getId()) {
+                    return -1;
+                }
+                return 1;
+            });
+            ResponseEntity r = new ResponseEntity(list, HttpStatus.OK);
+            return r;
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);
         } catch (Exception e) {

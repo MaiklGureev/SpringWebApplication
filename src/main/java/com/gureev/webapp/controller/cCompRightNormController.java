@@ -33,6 +33,12 @@ public class cCompRightNormController {
     public ResponseEntity  getCompRightNorms() {
         try{
             List<cCompRightNorm> list = (List<cCompRightNorm>) compRightNormRepo.findAll();
+            list.sort((o1, o2) -> {
+                if (o1.getId() > o2.getId()) {
+                    return -1;
+                }
+                return 1;
+            });
             return new ResponseEntity(list, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity("Entities not found!", HttpStatus.NOT_FOUND);

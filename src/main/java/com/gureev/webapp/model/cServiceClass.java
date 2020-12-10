@@ -1,7 +1,5 @@
 package com.gureev.webapp.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 
 @Entity
@@ -10,9 +8,9 @@ public class cServiceClass {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @JsonIgnore
-    @ManyToOne(cascade = CascadeType.ALL, optional = false)
-    private cServiceSection c_Service_section;
+//    @JsonIgnore
+@ManyToOne(targetEntity = cServiceSection.class, optional = false, cascade = {CascadeType.REFRESH})
+private cServiceSection serviceSection;
 
     private String code;
 
@@ -21,9 +19,9 @@ public class cServiceClass {
     public cServiceClass() {
     }
 
-    public cServiceClass(long id, cServiceSection c_Service_section, String code, String description) {
+    public cServiceClass(long id, cServiceSection serviceSection, String code, String description) {
         this.id = id;
-        this.c_Service_section = c_Service_section;
+        this.serviceSection = serviceSection;
         this.code = code;
         this.description = description;
     }
@@ -36,12 +34,12 @@ public class cServiceClass {
         this.id = id;
     }
 
-    public cServiceSection getC_Service_section() {
-        return c_Service_section;
+    public cServiceSection getServiceSection() {
+        return serviceSection;
     }
 
-    public void setC_Service_section(cServiceSection c_Service_section) {
-        this.c_Service_section = c_Service_section;
+    public void setServiceSection(cServiceSection serviceSection) {
+        this.serviceSection = serviceSection;
     }
 
     public String getCode() {
@@ -64,7 +62,7 @@ public class cServiceClass {
     public String toString() {
         return "cServiceClass{" +
                 "id=" + id +
-                ", c_Service_section=" + c_Service_section +
+                ", service_section=" + serviceSection +
                 ", code='" + code + '\'' +
                 ", description='" + description + '\'' +
                 '}';
